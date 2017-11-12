@@ -23,11 +23,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private GridLayout grid;
     private TextView[][] cell;
     private TextView score;
+    private TextView max;
 
     private Tile[] myTiles;
     boolean myWin = false;
     boolean myLose = false;
     int myScore = 0;
+    int myMax = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         grid = findViewById(R.id.grid);
         score = findViewById(R.id.score);
+        max = findViewById(R.id.max);
 
         grid.setRowCount(gridSize);
         grid.setColumnCount(gridSize);
@@ -156,6 +159,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         score.setText(String.valueOf(myScore));
+        max.setText(String.valueOf(myMax));
     }
 
     @Override
@@ -188,6 +192,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public void resetGame() {
         myScore = 0;
+        myMax = 0;
         myWin = false;
         myLose = false;
         myTiles = new Tile[gridSize * gridSize];
@@ -340,6 +345,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 int ourTarget = 2048;
                 if (num == ourTarget) {
                     myWin = true;
+                }
+                if (num > myMax) {
+                    myMax = num;
                 }
                 i++;
             }

@@ -6,4 +6,5 @@
     <string name="button_right">Derecha</string>
     <string name="new_game">Nuevo Juego</string>
     <string name="score">Puntaje</string>
+    <string name="max">Maximo</string>
 </resources>
