@@ -38,7 +38,7 @@
             android:layout_toRightOf="@id/text_score"
             android:layout_margin="@dimen/margin"
             android:textSize="@dimen/text_size_medium"
-            android:text="0" />
+            android:text="@string/initial_value" />
 
         <TextView
             android:id="@+id/text_max"
@@ -58,7 +58,7 @@
             android:layout_below="@id/score"
             android:layout_margin="@dimen/margin"
             android:textSize="@dimen/text_size_medium"
-            android:text="0" />
+            android:text="@string/initial_value" />
 
     </RelativeLayout>
 
