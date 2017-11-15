@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class GameActivity extends Activity implements View.OnClickListener {
     private Button btnNew;
 
     private int gridSize;
@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
         gridSize = 5;
 

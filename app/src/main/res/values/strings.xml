@@ -4,4 +4,6 @@
     <string name="score">Puntaje</string>
     <string name="max">Maximo</string>
     <string name="initial_value">0</string>
+    <string name="facebook_app_id">1537951019575774</string>
+    <string name="fb_login_protocol_scheme">fb1537951019575774</string>
 </resources>
