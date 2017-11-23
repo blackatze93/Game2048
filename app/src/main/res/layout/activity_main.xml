@@ -35,11 +35,10 @@
 
     <ImageView
         android:id="@+id/photoImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/uidTextView"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/bg_2"/>
+        android:layout_centerHorizontal="true" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/loginButton"

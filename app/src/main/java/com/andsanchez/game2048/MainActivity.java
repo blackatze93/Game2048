@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -53,7 +54,7 @@ public class MainActivity extends Activity {
             nameTextView.setText(name);
             emailTextView.setText(email);
             uidTextView.setText(uid);
-            photoImageView.setImageURI(photoUrl);
+            Picasso.with(this).load(photoUrl).into(photoImageView);
         } else {
             goLoginScreen();
         }
