@@ -10,13 +10,25 @@ import android.os.Bundle;
 
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileDescriptor;
@@ -25,9 +37,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends Activity {
 
+    private static final String TAG = "MainActivity";
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView uidTextView;
@@ -55,9 +70,51 @@ public class MainActivity extends Activity {
             emailTextView.setText(email);
             uidTextView.setText(uid);
             Picasso.with(this).load(photoUrl).into(photoImageView);
+
+            updateScore(user, 100, 100);
+//
+//
+//            db.collection("users")
+//                .orderBy("max", Query.Direction.DESCENDING)
+//                .orderBy("score", Query.Direction.DESCENDING)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (DocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+//                        }
+//
+//                    }
+//                });
+
         } else {
             goLoginScreen();
         }
+    }
+
+    private void updateScore(FirebaseUser user, final int max, final int score) {
+        final String uid = user.getUid();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User userDb = documentSnapshot.toObject(User.class);
+                if (max > userDb.getMax()){
+                    userDb.setMax(max);
+                }
+                if (score > userDb.getScore()) {
+                    userDb.setScore(score);
+                }
+                db.collection("users").document(uid).set(userDb);
+            }
+        });
     }
 
     private void goLoginScreen() {
