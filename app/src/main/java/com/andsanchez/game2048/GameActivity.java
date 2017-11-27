@@ -11,6 +11,13 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -133,11 +140,36 @@ public class GameActivity extends Activity implements View.OnClickListener {
         draw();
     }
 
+    private void updateScore(final int max, final int score) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String uid = user.getUid();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        final DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User userDb = documentSnapshot.toObject(User.class);
+                if (max > userDb.getMax()) {
+                    userDb.setMax(max);
+                }
+                if (score > userDb.getScore()) {
+                    userDb.setScore(score);
+                }
+                db.collection("users").document(uid).set(userDb);
+            }
+        });
+    }
+
+
     private void draw(){
         if (myLose) {
             Toast.makeText(this, "Has perdido", Toast.LENGTH_SHORT).show();
+            updateScore(myMax, myScore);
         } else if (myWin) {
             Toast.makeText(this, "Has ganado", Toast.LENGTH_SHORT).show();
+            updateScore(myMax, myScore);
         }
 
         for (int y = 0; y < gridSize; y++){
@@ -191,6 +223,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     }
 
     public void resetGame() {
+        updateScore(myMax, myScore);
         myScore = 0;
         myMax = 0;
         myWin = false;

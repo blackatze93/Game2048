@@ -67,26 +67,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void updateScore(FirebaseUser user, final int max, final int score) {
-        final String uid = user.getUid();
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        final DocumentReference docRef = db.collection("users").document(uid);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User userDb = documentSnapshot.toObject(User.class);
-                if (max > userDb.getMax()) {
-                    userDb.setMax(max);
-                }
-                if (score > userDb.getScore()) {
-                    userDb.setScore(score);
-                }
-                db.collection("users").document(uid).set(userDb);
-            }
-        });
-    }
-
     private void goLoginScreen() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
