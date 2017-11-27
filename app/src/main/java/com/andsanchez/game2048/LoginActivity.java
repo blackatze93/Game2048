@@ -94,11 +94,10 @@ public class LoginActivity extends Activity {
                     DocumentSnapshot document = task.getResult();
                     if (!document.exists()) {
                         String name = user.getDisplayName();
-                        String email = user.getEmail();
                         Uri photoUrl = user.getPhotoUrl();
                         String uid = user.getUid();
 
-                        User userDb = new User(name, email, photoUrl.toString(), 0, 0);
+                        User userDb = new User(name, photoUrl.toString(), 0, 0);
                         db.collection("users").document(uid).set(userDb);
                     }
                 } else {

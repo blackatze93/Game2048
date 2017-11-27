@@ -1,44 +1,22 @@
 package com.andsanchez.game2048;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends Activity {
 
@@ -71,7 +49,7 @@ public class MainActivity extends Activity {
             uidTextView.setText(uid);
             Picasso.with(this).load(photoUrl).into(photoImageView);
 
-            updateScore(user, 100, 100);
+            //updateScore(list_user, 100, 100);
 //
 //
 //            db.collection("users")
@@ -101,12 +79,12 @@ public class MainActivity extends Activity {
         final String uid = user.getUid();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        DocumentReference docRef = db.collection("users").document(uid);
+        final DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User userDb = documentSnapshot.toObject(User.class);
-                if (max > userDb.getMax()){
+                if (max > userDb.getMax()) {
                     userDb.setMax(max);
                 }
                 if (score > userDb.getScore()) {
