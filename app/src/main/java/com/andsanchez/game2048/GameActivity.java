@@ -36,7 +36,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gridSize = 5;
+        gridSize = 4;
 
         cell = new TextView[gridSize][gridSize];
 

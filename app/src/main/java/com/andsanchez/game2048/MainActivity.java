@@ -22,8 +22,6 @@ public class MainActivity extends Activity {
 
     private static final String TAG = "MainActivity";
     private TextView nameTextView;
-    private TextView emailTextView;
-    private TextView uidTextView;
     private ImageView photoImageView;
 
     @Override
@@ -32,21 +30,15 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         nameTextView = (TextView) findViewById(R.id.nameTextView);
-        emailTextView = (TextView) findViewById(R.id.emailTextView);
-        uidTextView = (TextView) findViewById(R.id.uidTextView);
         photoImageView = (ImageView) findViewById(R.id.photoImageView);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
             String name = user.getDisplayName();
-            String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
 
             nameTextView.setText(name);
-            emailTextView.setText(email);
-            uidTextView.setText(uid);
             Picasso.with(this).load(photoUrl).into(photoImageView);
 
             //updateScore(list_user, 100, 100);
@@ -98,6 +90,17 @@ public class MainActivity extends Activity {
     private void goLoginScreen() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+
+    public void ranking(View view) {
+        Intent intent = new Intent(this, RankingActivity.class);
+        startActivity(intent);
+    }
+
+    public void newGame(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 

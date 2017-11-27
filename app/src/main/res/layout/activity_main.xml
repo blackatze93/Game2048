@@ -6,48 +6,51 @@
     android:padding="@dimen/margin"
     tools:context="com.andsanchez.game2048.MainActivity">
 
-    <TextView
-        android:id="@+id/nameTextView"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" >
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/photoImageView"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/margin"
+            android:text="Nombre"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/photoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/rankingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ranking"
+        android:onClick="ranking"
+        android:layout_centerInParent="true" />
+
+    <Button
+        android:id="@+id/newButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Nombre"
-        android:textSize="20sp" />
+        android:layout_above="@id/rankingButton"
+        android:onClick="newGame"
+        android:text="@string/new_game" />
 
-    <TextView
-        android:id="@+id/emailTextView"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/nameTextView"
+        android:layout_below="@id/rankingButton"
         android:layout_centerHorizontal="true"
-        android:text="Email"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/uidTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nameTextView"
-        android:layout_centerHorizontal="true"
-        android:text="UID"
-        android:textSize="14sp" />
-
-    <ImageView
-        android:id="@+id/photoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/uidTextView"
-        android:layout_centerHorizontal="true" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:onClick="logout" />
+        android:onClick="logout"
+        android:text="@string/logout"/>
 
 </RelativeLayout>
