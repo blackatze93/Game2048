@@ -49,10 +49,10 @@ public class UserAdapter extends BaseAdapter {
         }
 
         // Set data into the view.
-        ImageView photoImageView = (ImageView) rowView.findViewById(R.id.photoImageView);
-        TextView nameTextView = (TextView) rowView.findViewById(R.id.nameTextView);
-        TextView maxTextView = (TextView) rowView.findViewById(R.id.maxTextView);
-        TextView scoreTextView = (TextView) rowView.findViewById(R.id.scoreTextView);
+        ImageView photoImageView = rowView.findViewById(R.id.photoImageView);
+        TextView nameTextView = rowView.findViewById(R.id.nameTextView);
+        TextView maxTextView = rowView.findViewById(R.id.maxTextView);
+        TextView scoreTextView = rowView.findViewById(R.id.scoreTextView);
 
         User user = this.users.get(position);
         nameTextView.setText(user.getName());

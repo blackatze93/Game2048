@@ -8,11 +8,11 @@ public class User {
 
     public User() {}
 
-    public User(String name, String photoUrl, int max, int score) {
+    public User(String name, String photoUrl) {
         this.name = name;
         this.photoUrl = photoUrl;
-        this.max = max;
-        this.score = score;
+        this.max = 0;
+        this.score = 0;
     }
 
     public String getName() {
