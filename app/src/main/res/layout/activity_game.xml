@@ -26,7 +26,9 @@
             android:id="@+id/text_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/text_size_medium"
             android:text="@string/score" />
@@ -36,7 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/text_score"
-            android:layout_margin="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_medium"
             android:text="@string/initial_value" />
 
@@ -44,9 +48,11 @@
             android:id="@+id/text_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/text_score"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_medium"
             android:text="@string/max" />
 
@@ -56,7 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/text_max"
             android:layout_below="@id/score"
-            android:layout_margin="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_medium"
             android:text="@string/initial_value" />
 

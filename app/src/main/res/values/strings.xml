@@ -12,4 +12,5 @@
     <string name="logout">Cerrar sesión</string>
     <string name="firebase_error_login">Error al iniciar sesión en Firebase</string>
     <string name="ranking">Ranking</string>
+    <string name="level">Nivel</string>
 </resources>

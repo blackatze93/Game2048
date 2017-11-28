@@ -43,7 +43,8 @@ public class GameActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gridSize = 4;
+        //gridSize = 4;
+        gridSize = getIntent().getIntExtra("level", 0);
 
         cell = new TextView[gridSize][gridSize];
 
@@ -140,29 +141,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
         draw();
     }
 
-    private void updateScore(final int max, final int score) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        final String uid = user.getUid();
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        final DocumentReference docRef = db.collection("users").document(uid);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User userDb = documentSnapshot.toObject(User.class);
-                if (max > userDb.getMax()) {
-                    userDb.setMax(max);
-                }
-                if (score > userDb.getScore()) {
-                    userDb.setScore(score);
-                }
-                db.collection("users").document(uid).set(userDb);
-            }
-        });
-    }
-
-
     private void draw(){
         if (myLose) {
             Toast.makeText(this, "Has perdido", Toast.LENGTH_SHORT).show();
@@ -192,20 +170,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         score.setText(String.valueOf(myScore));
         max.setText(String.valueOf(myMax));
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
     }
 
     @Override
@@ -410,5 +374,28 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     private void setLine(int index, Tile[] re) {
         System.arraycopy(re, 0, myTiles, index * gridSize, gridSize);
+    }
+
+
+    private void updateScore(final int max, final int score) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String uid = user.getUid();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        final DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User userDb = documentSnapshot.toObject(User.class);
+                if (max > userDb.getMax()) {
+                    userDb.setMax(max);
+                }
+                if (score > userDb.getScore()) {
+                    userDb.setScore(score);
+                }
+                db.collection("users").document(uid).set(userDb);
+            }
+        });
     }
 }

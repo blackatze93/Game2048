@@ -16,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/photoImageView"
-            android:layout_alignParentTop="true"
             android:paddingLeft="@dimen/margin"
             android:text="Nombre"
             android:textSize="20sp" />
@@ -24,8 +23,28 @@
         <ImageView
             android:id="@+id/photoImageView"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/newButton" >
+
+        <TextView
+            android:id="@+id/levelTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
+            android:text="@string/level"
+            android:textSize="18sp"/>
+
+        <Spinner
+            android:id="@+id/levelSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/levelTextView"
+            android:layout_marginLeft="@dimen/margin" />
     </RelativeLayout>
 
     <Button
@@ -52,5 +71,6 @@
         android:layout_centerHorizontal="true"
         android:onClick="logout"
         android:text="@string/logout"/>
+
 
 </RelativeLayout>
