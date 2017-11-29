@@ -125,12 +125,20 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         });
 
-        int size = (int) getResources().getDimension(R.dimen.side_size);
+        int size;
+        float text_size;
+        if (gridSize == 5) {
+            size = (int) getResources().getDimension(R.dimen.side_size_5);
+            text_size = getResources().getDimension(R.dimen.text_size_5);
+        } else {
+            size = (int) getResources().getDimension(R.dimen.side_size);
+            text_size = getResources().getDimension(R.dimen.text_size);
+        }
 
         for (int y = 0; y < gridSize; y++){
             for (int x = 0; x < gridSize; x++) {
                 cell[x][y] = new TextView(this);
-                cell[x][y].setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size));
+                cell[x][y].setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
                 cell[x][y].setGravity(Gravity.CENTER);
                 cell[x][y].setLayoutParams(new ViewGroup.LayoutParams(size, size));
                 grid.addView(cell[x][y]);
@@ -376,6 +384,11 @@ public class GameActivity extends Activity implements View.OnClickListener {
         System.arraycopy(re, 0, myTiles, index * gridSize, gridSize);
     }
 
+    @Override
+    public void onBackPressed() {
+        updateScore(myMax, myScore);
+        super.onBackPressed();
+    }
 
     private void updateScore(final int max, final int score) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

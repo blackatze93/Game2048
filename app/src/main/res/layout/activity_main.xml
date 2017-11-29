@@ -18,7 +18,7 @@
             android:layout_toRightOf="@id/photoImageView"
             android:paddingLeft="@dimen/margin"
             android:text="Nombre"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_medium" />
 
         <ImageView
             android:id="@+id/photoImageView"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/level"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/text_size_medium"/>
 
         <Spinner
             android:id="@+id/levelSpinner"
