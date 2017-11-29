@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 
     private void saveUserDb(final FirebaseUser user) {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("users").document(user.getUid());
+        DocumentReference docRef = db.collection("users").document(String.valueOf(3)).collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -98,7 +98,9 @@ public class LoginActivity extends Activity {
                         String uid = user.getUid();
 
                         User userDb = new User(name, photoUrl.toString());
-                        db.collection("users").document(uid).set(userDb);
+                        db.collection("scores").document("3").collection("users").document(uid).set(userDb);
+                        db.collection("scores").document("4").collection("users").document(uid).set(userDb);
+                        db.collection("scores").document("5").collection("users").document(uid).set(userDb);
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
@@ -146,19 +148,5 @@ public class LoginActivity extends Activity {
     protected void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(firebaseAuthListener);
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
     }
 }

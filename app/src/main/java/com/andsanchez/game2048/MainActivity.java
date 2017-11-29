@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
 
     public void ranking(View view) {
         Intent intent = new Intent(this, RankingActivity.class);
+        intent.putExtra("level", level);
         startActivity(intent);
     }
 

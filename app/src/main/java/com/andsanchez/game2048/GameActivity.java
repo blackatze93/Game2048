@@ -390,13 +390,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
         super.onBackPressed();
     }
 
-    private void updateScore(final int max, final int score) {
+    private void updateScore(final long max, final long score) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         final String uid = user.getUid();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        final DocumentReference docRef = db.collection("users").document(uid);
+        final DocumentReference docRef = db.collection("scores").document(String.valueOf(gridSize)).collection("users").document(uid);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -407,7 +407,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 if (score > userDb.getScore()) {
                     userDb.setScore(score);
                 }
-                db.collection("users").document(uid).set(userDb);
+                db.collection("scores").document(String.valueOf(gridSize)).collection("users").document(uid).set(userDb);
             }
         });
     }

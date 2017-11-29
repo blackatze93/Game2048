@@ -22,9 +22,10 @@ public class RankingActivity extends Activity {
 
         final ArrayList<User> users = new ArrayList<User>();
         final ListView listView = findViewById(R.id.listView);
+        int level = getIntent().getIntExtra("level", 0);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
+        db.collection("scores").document(String.valueOf(level)).collection("users")
             .orderBy("max", Query.Direction.DESCENDING)
             .orderBy("score", Query.Direction.DESCENDING)
             .get()

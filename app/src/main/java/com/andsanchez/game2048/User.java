@@ -3,8 +3,8 @@ package com.andsanchez.game2048;
 public class User {
     private String name;
     private String photoUrl;
-    private int max;
-    private int score;
+    private long max;
+    private long score;
 
     public User() {}
 
@@ -23,19 +23,19 @@ public class User {
         return photoUrl;
     }
 
-    public int getMax() {
+    public long getMax() {
         return max;
     }
 
-    public void setMax(int max) {
+    public void setMax(long max) {
         this.max = max;
     }
 
-    public int getScore() {
+    public long getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(long score) {
         this.score = score;
     }
 }
