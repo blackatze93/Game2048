@@ -32,9 +32,16 @@ public class RankingActivity extends Activity {
             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot documentSnapshots) {
+                    int size = 0;
                     for (DocumentSnapshot document : documentSnapshots.getDocuments()) {
                         User userDb = document.toObject(User.class);
-                        users.add(userDb);
+                        if (userDb.getScore() != 0 && userDb.getMax() != 0) {
+                            users.add(userDb);
+                            size++;
+                        }
+                        if (size == 10) {
+                            break;
+                        }
                     }
                     listView.setAdapter(new UserAdapter(getApplicationContext(), users));
                 }

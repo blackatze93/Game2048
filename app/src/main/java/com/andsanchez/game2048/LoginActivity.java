@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 
     private void saveUserDb(final FirebaseUser user) {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("users").document(String.valueOf(3)).collection("users").document(user.getUid());
+        DocumentReference docRef = db.collection("scores").document(String.valueOf(3)).collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

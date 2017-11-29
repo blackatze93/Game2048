@@ -56,8 +56,8 @@ public class UserAdapter extends BaseAdapter {
 
         User user = this.users.get(position);
         nameTextView.setText(user.getName());
-        maxTextView.setText(String.valueOf(user.getMax()));
-        scoreTextView.setText(String.valueOf(user.getScore()));
+        maxTextView.setText("Max: " + String.valueOf(user.getMax()));
+        scoreTextView.setText("Pun: g" + String.valueOf(user.getScore()));
         Picasso.with(this.context).load(user.getPhotoUrl()).into(photoImageView);
 
         return rowView;
