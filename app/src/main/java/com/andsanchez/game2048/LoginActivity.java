@@ -114,10 +114,12 @@ public class LoginActivity extends Activity {
         loginButton.setVisibility(View.GONE);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        System.out.println("CREDENCIALES" + credential);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
+                    Log.w(TAG, "signInWithCredential:failure", task.getException());
                     Toast.makeText(getApplicationContext(), R.string.firebase_error_login, Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.GONE);
